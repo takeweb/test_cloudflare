@@ -7,14 +7,33 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-
-// Hono の場合のコード例 (worker.js など)
 import { Hono } from 'hono';
 
 const app = new Hono();
 
 app.get('/', (c) => {
 	return c.text('Hello World from Hono!!!'); // c.text() や c.json() を使用
+});
+
+// 新しいルート: "/about" でクエリパラメータを処理
+app.get('/about', (c) => {
+	// c.req.query('キー名') を使ってパラメータを取得
+	const version = c.req.query('version');
+
+	let responseText = 'This is the About Page of the Hono Worker.';
+
+	if (version) {
+		// パラメータ 'version' が存在する場合、その値を含める
+		responseText += `\nApplication Version: ${version}`;
+	} else {
+		// パラメータがない場合の処理
+		responseText += '\nVersion parameter not provided.';
+	}
+
+	return c.json({
+		message: responseText,
+		version: version || null,
+	});
 });
 
 // fetch ハンドラで Hono アプリケーションを実行
