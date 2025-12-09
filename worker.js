@@ -22,14 +22,6 @@ app.get('/about', (c) => {
 
 	let responseText = 'This is the About Page of the Hono Worker.';
 
-	if (version) {
-		// パラメータ 'version' が存在する場合、その値を含める
-		responseText += `\nApplication Version: ${version}`;
-	} else {
-		// パラメータがない場合の処理
-		responseText += '\nVersion parameter not provided.';
-	}
-
 	return c.json({
 		message: responseText,
 		version: version || null,
