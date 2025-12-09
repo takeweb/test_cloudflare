@@ -8,10 +8,14 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-  async fetch(request, env, ctx) {
-    // You can view your logs in the Observability dashboard
-    console.info({ message: "Hello World Worker received a request!" });
-    return new Response("Hello World!!!");
-  },
-};
+// Hono の場合のコード例 (worker.js など)
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.get('/', (c) => {
+	return c.text('Hello World!!!'); // c.text() や c.json() を使用
+});
+
+// fetch ハンドラで Hono アプリケーションを実行
+export default app;
