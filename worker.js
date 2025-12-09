@@ -14,7 +14,7 @@ import { Hono } from 'hono';
 const app = new Hono();
 
 app.get('/', (c) => {
-	return c.text('Hello World!!!'); // c.text() や c.json() を使用
+	return c.text('Hello World from Hono!!!'); // c.text() や c.json() を使用
 });
 
 // fetch ハンドラで Hono アプリケーションを実行
